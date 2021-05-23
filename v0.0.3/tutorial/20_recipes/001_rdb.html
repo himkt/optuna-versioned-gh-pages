@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Saving/Resuming Study with RDB Backend &mdash; Optuna 2.8.0.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Multi-objective Optimization with Optuna" href="002_multi_objective.html" />
+    <link rel="prev" title="Quick Visualization for Hyperparameter Optimization Analysis" href="../10_key_features/005_visualization.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+  
+    <div class="navbar">
+        <div class="navbar ml-auto">
+            <ul class="navbar-nav">
+                <li>
+                    <a href="https://optuna.org/#key_features" class="header_link">Key Features</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#code_examples" class="header_link">Code Examples</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#installation" class="header_link">Installation</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#blog" class="header_link">Blog</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#video" class="header_link">Videos</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#paper" class="header_link">Paper</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#community" class="header_link">Community</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+     
+
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/optuna-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.8.0.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#key-features">Key Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#recipes">Recipes</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Saving/Resuming Study with RDB Backend</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#new-study">New Study</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resume-study">Resume Study</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#experimental-history">Experimental History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="002_multi_objective.html">Multi-objective Optimization with Optuna</a></li>
+<li class="toctree-l3"><a class="reference internal" href="003_attributes.html">User Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="004_cli.html">Command-Line Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="005_user_defined_sampler.html">User-Defined Sampler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="006_user_defined_pruner.html">User-Defined Pruner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="007_optuna_callback.html">Callback for Study.optimize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="008_specify_params.html">Specify Hyperparameters Manually</a></li>
+<li class="toctree-l3"><a class="reference internal" href="009_ask_and_tell.html">Ask-and-Tell Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="010_reuse_best_trial.html">Re-use the best values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optuna</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Tutorial</a> &raquo;</li>
+        
+      <li>Saving/Resuming Study with RDB Backend</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorial/20_recipes/001_rdb.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-tutorial-20-recipes-001-rdb-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="saving-resuming-study-with-rdb-backend">
+<span id="rdb"></span><span id="sphx-glr-tutorial-20-recipes-001-rdb-py"></span><h1>Saving/Resuming Study with RDB Backend<a class="headerlink" href="#saving-resuming-study-with-rdb-backend" title="Permalink to this headline">¶</a></h1>
+<p>An RDB backend enables persistent experiments (i.e., to save and resume a study) as well as access to history of studies.
+In addition, we can run multi-node optimization tasks with this feature, which is described in <a class="reference internal" href="../10_key_features/004_distributed.html#distributed"><span class="std std-ref">Easy Parallelization</span></a>.</p>
+<p>In this section, let’s try simple examples running on a local environment with SQLite DB.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also utilize other RDB backends, e.g., PostgreSQL or MySQL, by setting the storage argument to the DB’s URL.
+Please refer to <a class="reference external" href="https://docs.sqlalchemy.org/en/latest/core/engines.html#database-urls">SQLAlchemy’s document</a> for how to set up the URL.</p>
+</div>
+<div class="section" id="new-study">
+<h2>New Study<a class="headerlink" href="#new-study" title="Permalink to this headline">¶</a></h2>
+<p>We can create a persistent study by calling <a class="reference internal" href="../../reference/generated/optuna.study.create_study.html#optuna.study.create_study" title="optuna.study.create_study"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_study()</span></code></a> function as follows.
+An SQLite file <code class="docutils literal notranslate"><span class="pre">example.db</span></code> is automatically initialized with a new study record.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">optuna</span>
+
+<span class="c1"># Add stream handler of stdout to show the messages</span>
+<span class="n">optuna</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;optuna&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><a href="https://docs.python.org/3/library/logging.handlers.html#logging.StreamHandler" title="logging.StreamHandler" class="sphx-glr-backref-module-logging sphx-glr-backref-type-py-class"><span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/io.html#io.TextIOWrapper" title="io.TextIOWrapper" class="sphx-glr-backref-module-io sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span></a><span class="p">))</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">study_name</span></a> <span class="o">=</span> <span class="s2">&quot;example-study&quot;</span>  <span class="c1"># Unique identifier of the study.</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">storage_name</span></a> <span class="o">=</span> <span class="s2">&quot;sqlite:///</span><span class="si">{}</span><span class="s2">.db&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">study_name</span></a><span class="p">)</span>
+<span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">study_name</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">study_name</span></a><span class="p">,</span> <span class="n">storage</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">storage_name</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>A new study created in RDB with name: example-study
+</pre></div>
+</div>
+<p>To run a study, call <a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study.optimize" title="optuna.study.Study.optimize"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize()</span></code></a> method passing an objective function.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+<span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Trial 0 finished with value: 18.7750441161467 and parameters: {&#39;x&#39;: 6.3330178993568325}. Best is trial 0 with value: 18.7750441161467.
+Trial 1 finished with value: 12.394425638449666 and parameters: {&#39;x&#39;: -1.5205717772046157}. Best is trial 1 with value: 12.394425638449666.
+Trial 2 finished with value: 2.929247070591959 and parameters: {&#39;x&#39;: 3.7115043297029544}. Best is trial 2 with value: 2.929247070591959.
+</pre></div>
+</div>
+</div>
+<div class="section" id="resume-study">
+<h2>Resume Study<a class="headerlink" href="#resume-study" title="Permalink to this headline">¶</a></h2>
+<p>To resume a study, instantiate a <a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study" title="optuna.study.Study"><code class="xref py py-class docutils literal notranslate"><span class="pre">Study</span></code></a> object
+passing the study name <code class="docutils literal notranslate"><span class="pre">example-study</span></code> and the DB URL <code class="docutils literal notranslate"><span class="pre">sqlite:///example-study.db</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">study_name</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">study_name</span></a><span class="p">,</span> <span class="n">storage</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">storage_name</span></a><span class="p">,</span> <span class="n">load_if_exists</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Using an existing study with name &#39;example-study&#39; instead of creating a new one.
+Trial 3 finished with value: 10.023656121479526 and parameters: {&#39;x&#39;: 5.166015811944016}. Best is trial 2 with value: 2.929247070591959.
+Trial 4 finished with value: 44.73422087542719 and parameters: {&#39;x&#39;: -4.688364589002845}. Best is trial 2 with value: 2.929247070591959.
+Trial 5 finished with value: 56.94412484209588 and parameters: {&#39;x&#39;: -5.546133105246414}. Best is trial 2 with value: 2.929247070591959.
+</pre></div>
+</div>
+</div>
+<div class="section" id="experimental-history">
+<h2>Experimental History<a class="headerlink" href="#experimental-history" title="Permalink to this headline">¶</a></h2>
+<p>We can access histories of studies and trials via the <a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study" title="optuna.study.Study"><code class="xref py py-class docutils literal notranslate"><span class="pre">Study</span></code></a> class.
+For example, we can get all trials of <code class="docutils literal notranslate"><span class="pre">example-study</span></code> as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">study_name</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">study_name</span></a><span class="p">,</span> <span class="n">storage</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">storage_name</span></a><span class="p">,</span> <span class="n">load_if_exists</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">trials_dataframe</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Using an existing study with name &#39;example-study&#39; instead of creating a new one.
+</pre></div>
+</div>
+<p>The method <a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study.trials_dataframe" title="optuna.study.Study.trials_dataframe"><code class="xref py py-func docutils literal notranslate"><span class="pre">trials_dataframe()</span></code></a> returns a pandas dataframe like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>   number      value  params_x     state
+0       0  18.775044  6.333018  COMPLETE
+1       1  12.394426 -1.520572  COMPLETE
+2       2   2.929247  3.711504  COMPLETE
+3       3  10.023656  5.166016  COMPLETE
+4       4  44.734221 -4.688365  COMPLETE
+5       5  56.944125 -5.546133  COMPLETE
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study" title="optuna.study.Study"><code class="xref py py-class docutils literal notranslate"><span class="pre">Study</span></code></a> object also provides properties
+such as <a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study.trials" title="optuna.study.Study.trials"><code class="xref py py-attr docutils literal notranslate"><span class="pre">trials</span></code></a>, <a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study.best_value" title="optuna.study.Study.best_value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">best_value</span></code></a>,
+<a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study.best_params" title="optuna.study.Study.best_params"><code class="xref py py-attr docutils literal notranslate"><span class="pre">best_params</span></code></a> (see also <a class="reference internal" href="../10_key_features/001_first.html#first"><span class="std std-ref">Lightweight, versatile, and platform agnostic architecture</span></a>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best params: &quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_params</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best value: &quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best Trial: &quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_trial</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trials: &quot;</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">trials</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Best params:  {&#39;x&#39;: 3.7115043297029544}
+Best value:  2.929247070591959
+Best Trial:  FrozenTrial(number=2, values=[2.929247070591959], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 56, 354355), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 56, 367572), params={&#39;x&#39;: 3.7115043297029544}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=3, state=TrialState.COMPLETE, value=None)
+Trials:  [FrozenTrial(number=0, values=[18.7750441161467], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 56, 244131), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 56, 263770), params={&#39;x&#39;: 6.3330178993568325}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=1, state=TrialState.COMPLETE, value=None), FrozenTrial(number=1, values=[12.394425638449666], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 56, 310512), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 56, 325197), params={&#39;x&#39;: -1.5205717772046157}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=2, state=TrialState.COMPLETE, value=None), FrozenTrial(number=2, values=[2.929247070591959], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 56, 354355), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 56, 367572), params={&#39;x&#39;: 3.7115043297029544}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=3, state=TrialState.COMPLETE, value=None), FrozenTrial(number=3, values=[10.023656121479526], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 56, 459130), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 56, 477106), params={&#39;x&#39;: 5.166015811944016}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=4, state=TrialState.COMPLETE, value=None), FrozenTrial(number=4, values=[44.73422087542719], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 56, 515034), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 56, 529139), params={&#39;x&#39;: -4.688364589002845}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=5, state=TrialState.COMPLETE, value=None), FrozenTrial(number=5, values=[56.94412484209588], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 56, 557705), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 56, 570896), params={&#39;x&#39;: -5.546133105246414}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=6, state=TrialState.COMPLETE, value=None)]
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.719 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-20-recipes-001-rdb-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/b73c661c07098863641f4ba78170b234/001_rdb.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">001_rdb.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/29dc01fa0a6cc866899e95e53fbf9e2f/001_rdb.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">001_rdb.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="002_multi_objective.html" class="btn btn-neutral float-right" title="Multi-objective Optimization with Optuna" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../10_key_features/005_visualization.html" class="btn btn-neutral float-left" title="Quick Visualization for Hyperparameter Optimization Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018, Optuna Contributors..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <a href="../../privacy.html">Privacy Policy</a>.
+     
+
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
