@@ -46,9 +46,16 @@ jobs:
         make html
         cd ../
 
-    - name: Deploy
+    - name: Deploy (versioned)
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: docs/build/html
         destination_dir: ${{ github.event.release.tag_name }}
+
+    - name: Deploy (latest)
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/build/html
+        destination_dir: latest
