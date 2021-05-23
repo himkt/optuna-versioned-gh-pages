@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>optuna.cli &mdash; Optuna 2.8.0.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="optuna.distributions" href="distributions.html" />
+    <link rel="prev" title="optuna.TrialPruned" href="generated/optuna.TrialPruned.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+  
+    <div class="navbar">
+        <div class="navbar ml-auto">
+            <ul class="navbar-nav">
+                <li>
+                    <a href="https://optuna.org/#key_features" class="header_link">Key Features</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#code_examples" class="header_link">Code Examples</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#installation" class="header_link">Installation</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#blog" class="header_link">Blog</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#video" class="header_link">Videos</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#paper" class="header_link">Paper</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#community" class="header_link">Community</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+     
+
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/optuna-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.8.0.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optuna.html">optuna</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">optuna.cli</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-study">create-study</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dashboard">dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete-study">delete-study</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#storage-upgrade">storage upgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#studies">studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#study-optimize">study optimize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#study-set-user-attr">study set-user-attr</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="distributions.html">optuna.distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">optuna.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="importance.html">optuna.importance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration.html">optuna.integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">optuna.logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_objective/index.html">optuna.multi_objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pruners.html">optuna.pruners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samplers.html">optuna.samplers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storages.html">optuna.storages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structs.html">optuna.structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="study.html">optuna.study</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trial.html">optuna.trial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization/index.html">optuna.visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optuna</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">API Reference</a> &raquo;</li>
+        
+      <li>optuna.cli</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/reference/cli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-optuna.cli"></span><div class="section" id="optuna-cli">
+<h1>optuna.cli<a class="headerlink" href="#optuna-cli" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-optuna.cli" title="optuna.cli"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cli</span></code></a> module implements Optuna’s command-line functionality using the <a class="reference external" href="https://docs.openstack.org/cliff/latest/index.html">cliff framework</a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>optuna
+    <span class="o">[</span>--version<span class="o">]</span>
+    <span class="o">[</span>-v <span class="p">|</span> -q<span class="o">]</span>
+    <span class="o">[</span>--log-file LOG_FILE<span class="o">]</span>
+    <span class="o">[</span>--debug<span class="o">]</span>
+    <span class="o">[</span>--storage STORAGE<span class="o">]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt id="cmdoption-optuna-version">
+<code class="sig-name descname"><span class="pre">--version</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>show program’s version number and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-v">
+<span id="cmdoption-optuna-verbose"></span><code class="sig-name descname"><span class="pre">-v</span></code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname"><span class="pre">,</span> </code><code class="sig-name descname"><span class="pre">--verbose</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase verbosity of output. Can be repeated.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-q">
+<span id="cmdoption-optuna-quiet"></span><code class="sig-name descname"><span class="pre">-q</span></code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname"><span class="pre">,</span> </code><code class="sig-name descname"><span class="pre">--quiet</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suppress output except warnings and errors.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-log-file">
+<code class="sig-name descname"><span class="pre">--log-file</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;LOG_FILE&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-log-file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify a file to log output. Disabled by default.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-debug">
+<code class="sig-name descname"><span class="pre">--debug</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show tracebacks on errors.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-storage">
+<code class="sig-name descname"><span class="pre">--storage</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;STORAGE&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>DB URL. (e.g. sqlite:///example.db)</p>
+</dd></dl>
+
+<div class="section" id="create-study">
+<h2>create-study<a class="headerlink" href="#create-study" title="Permalink to this headline">¶</a></h2>
+<p>Create a new study.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>optuna create-study
+    <span class="o">[</span>--study-name STUDY_NAME<span class="o">]</span>
+    <span class="o">[</span>--direction <span class="o">{</span>minimize,maximize<span class="o">}]</span>
+    <span class="o">[</span>--skip-if-exists<span class="o">]</span>
+    <span class="o">[</span>--directions <span class="o">{</span>minimize,maximize<span class="o">}</span> <span class="o">[{</span>minimize,maximize<span class="o">}</span> ...<span class="o">]]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt id="cmdoption-optuna-create-study-study-name">
+<code class="sig-name descname"><span class="pre">--study-name</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;STUDY_NAME&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-create-study-study-name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A human-readable name of a study to distinguish it from others.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-create-study-direction">
+<code class="sig-name descname"><span class="pre">--direction</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;DIRECTION&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-create-study-direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set direction of optimization to a new study. Set ‘minimize’ for minimization and ‘maximize’ for maximization.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-create-study-skip-if-exists">
+<code class="sig-name descname"><span class="pre">--skip-if-exists</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-create-study-skip-if-exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>If specified, the creation of the study is skipped without any error when the study name is duplicated.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-create-study-directions">
+<code class="sig-name descname"><span class="pre">--directions</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;DIRECTIONS&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-create-study-directions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set directions of optimization to a new study. Put whitespace between directions. Each direction should be either “minimize” or “maximize”.</p>
+</dd></dl>
+
+<p>This command is provided by the optuna plugin.</p>
+</div>
+<div class="section" id="dashboard">
+<h2>dashboard<a class="headerlink" href="#dashboard" title="Permalink to this headline">¶</a></h2>
+<p>Launch web dashboard (beta).</p>
+<p>This feature is deprecated since version 2.7.0. Please use <a class="reference external" href="https://github.com/optuna/optuna-dashboard">optuna-dashboard</a> instead.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>optuna dashboard
+    <span class="o">[</span>--study STUDY<span class="o">]</span>
+    <span class="o">[</span>--study-name STUDY_NAME<span class="o">]</span>
+    <span class="o">[</span>--out OUT<span class="o">]</span>
+    <span class="o">[</span>--allow-websocket-origin BOKEH_ALLOW_WEBSOCKET_ORIGINS<span class="o">]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt id="cmdoption-optuna-dashboard-study">
+<code class="sig-name descname"><span class="pre">--study</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;STUDY&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-dashboard-study" title="Permalink to this definition">¶</a></dt>
+<dd><p>This argument is deprecated. Use –study-name instead.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-dashboard-study-name">
+<code class="sig-name descname"><span class="pre">--study-name</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;STUDY_NAME&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-dashboard-study-name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the study to show on the dashboard.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-dashboard-out">
+<span id="cmdoption-optuna-dashboard-o"></span><code class="sig-name descname"><span class="pre">--out</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;OUT&gt;</span></code><code class="sig-prename descclassname"><span class="pre">,</span> </code><code class="sig-name descname"><span class="pre">-o</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;OUT&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-dashboard-out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output HTML file path. If it is not given, a HTTP server starts and the dashboard is served.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-dashboard-allow-websocket-origin">
+<code class="sig-name descname"><span class="pre">--allow-websocket-origin</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;BOKEH_ALLOW_WEBSOCKET_ORIGINS&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-dashboard-allow-websocket-origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow websocket access from the specified host(s).Internally, it is used as the value of bokeh’s –allow-websocket-origin option. Please refer to <a class="reference external" href="https://bokeh.pydata.org/en/latest/docs/reference/command/subcommands/serve.html">https://bokeh.pydata.org/en/latest/docs/reference/command/subcommands/serve.html</a> for more details.</p>
+</dd></dl>
+
+<p>This command is provided by the optuna plugin.</p>
+</div>
+<div class="section" id="delete-study">
+<h2>delete-study<a class="headerlink" href="#delete-study" title="Permalink to this headline">¶</a></h2>
+<p>Delete a specified study.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>optuna delete-study <span class="o">[</span>--study-name STUDY_NAME<span class="o">]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt id="cmdoption-optuna-delete-study-study-name">
+<code class="sig-name descname"><span class="pre">--study-name</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;STUDY_NAME&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-delete-study-study-name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the study to delete.</p>
+</dd></dl>
+
+<p>This command is provided by the optuna plugin.</p>
+</div>
+<div class="section" id="storage-upgrade">
+<h2>storage upgrade<a class="headerlink" href="#storage-upgrade" title="Permalink to this headline">¶</a></h2>
+<p>Upgrade the schema of a storage.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>optuna storage upgrade
+</pre></div>
+</div>
+<p>This command is provided by the optuna plugin.</p>
+</div>
+<div class="section" id="studies">
+<h2>studies<a class="headerlink" href="#studies" title="Permalink to this headline">¶</a></h2>
+<p>Show a list of studies.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>optuna studies
+    <span class="o">[</span>-f <span class="o">{</span>csv,json,table,value,yaml<span class="o">}]</span>
+    <span class="o">[</span>-c COLUMN<span class="o">]</span>
+    <span class="o">[</span>--quote <span class="o">{</span>all,minimal,none,nonnumeric<span class="o">}]</span>
+    <span class="o">[</span>--noindent<span class="o">]</span>
+    <span class="o">[</span>--max-width &lt;integer&gt;<span class="o">]</span>
+    <span class="o">[</span>--fit-width<span class="o">]</span>
+    <span class="o">[</span>--print-empty<span class="o">]</span>
+    <span class="o">[</span>--sort-column SORT_COLUMN<span class="o">]</span>
+    <span class="o">[</span>--sort-ascending <span class="p">|</span> --sort-descending<span class="o">]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-f">
+<span id="cmdoption-optuna-studies-format"></span><code class="sig-name descname"><span class="pre">-f</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;FORMATTER&gt;</span></code><code class="sig-prename descclassname"><span class="pre">,</span> </code><code class="sig-name descname"><span class="pre">--format</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;FORMATTER&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-studies-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>the output format, defaults to table</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-c">
+<span id="cmdoption-optuna-studies-column"></span><code class="sig-name descname"><span class="pre">-c</span></code><code class="sig-prename descclassname"> <span class="pre">COLUMN</span></code><code class="sig-prename descclassname"><span class="pre">,</span> </code><code class="sig-name descname"><span class="pre">--column</span></code><code class="sig-prename descclassname"> <span class="pre">COLUMN</span></code><a class="headerlink" href="#cmdoption-optuna-studies-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>specify the column(s) to include, can be repeated to show multiple columns</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-quote">
+<code class="sig-name descname"><span class="pre">--quote</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;QUOTE_MODE&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-studies-quote" title="Permalink to this definition">¶</a></dt>
+<dd><p>when to include quotes, defaults to nonnumeric</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-noindent">
+<code class="sig-name descname"><span class="pre">--noindent</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-studies-noindent" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether to disable indenting the JSON</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-max-width">
+<code class="sig-name descname"><span class="pre">--max-width</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;integer&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-studies-max-width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum display width, &lt;1 to disable. You can also use the CLIFF_MAX_TERM_WIDTH environment variable, but the parameter takes precedence.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-fit-width">
+<code class="sig-name descname"><span class="pre">--fit-width</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-studies-fit-width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the table to the display width. Implied if –max-width greater than 0. Set the environment variable CLIFF_FIT_WIDTH=1 to always enable</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-print-empty">
+<code class="sig-name descname"><span class="pre">--print-empty</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-studies-print-empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print empty table if there is no data to show.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-sort-column">
+<code class="sig-name descname"><span class="pre">--sort-column</span></code><code class="sig-prename descclassname"> <span class="pre">SORT_COLUMN</span></code><a class="headerlink" href="#cmdoption-optuna-studies-sort-column" title="Permalink to this definition">¶</a></dt>
+<dd><p>specify the column(s) to sort the data (columns specified first have a priority, non-existing columns are ignored), can be repeated</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-sort-ascending">
+<code class="sig-name descname"><span class="pre">--sort-ascending</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-studies-sort-ascending" title="Permalink to this definition">¶</a></dt>
+<dd><p>sort the column(s) in ascending order</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-studies-sort-descending">
+<code class="sig-name descname"><span class="pre">--sort-descending</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-studies-sort-descending" title="Permalink to this definition">¶</a></dt>
+<dd><p>sort the column(s) in descending order</p>
+</dd></dl>
+
+<p>This command is provided by the optuna plugin.</p>
+</div>
+<div class="section" id="study-optimize">
+<h2>study optimize<a class="headerlink" href="#study-optimize" title="Permalink to this headline">¶</a></h2>
+<p>Start optimization of a study. Deprecated since version 2.0.0.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>optuna study optimize
+    <span class="o">[</span>--n-trials N_TRIALS<span class="o">]</span>
+    <span class="o">[</span>--timeout TIMEOUT<span class="o">]</span>
+    <span class="o">[</span>--n-jobs N_JOBS<span class="o">]</span>
+    <span class="o">[</span>--study STUDY<span class="o">]</span>
+    <span class="o">[</span>--study-name STUDY_NAME<span class="o">]</span>
+    file
+    method
+</pre></div>
+</div>
+<dl class="std option">
+<dt id="cmdoption-optuna-study-optimize-n-trials">
+<code class="sig-name descname"><span class="pre">--n-trials</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;N_TRIALS&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-study-optimize-n-trials" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of trials. If this argument is not given, as many trials run as possible.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-study-optimize-timeout">
+<code class="sig-name descname"><span class="pre">--timeout</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;TIMEOUT&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-study-optimize-timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop study after the given number of second(s). If this argument is not given, as many trials run as possible.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-study-optimize-n-jobs">
+<code class="sig-name descname"><span class="pre">--n-jobs</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;N_JOBS&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-study-optimize-n-jobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of parallel jobs. If this argument is set to -1, the number is set to CPU counts.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-study-optimize-study">
+<code class="sig-name descname"><span class="pre">--study</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;STUDY&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-study-optimize-study" title="Permalink to this definition">¶</a></dt>
+<dd><p>This argument is deprecated. Use –study-name instead.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-study-optimize-study-name">
+<code class="sig-name descname"><span class="pre">--study-name</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;STUDY_NAME&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-study-optimize-study-name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the study to start optimization on.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-study-optimize-arg-file">
+<code class="sig-name descname"><span class="pre">file</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-study-optimize-arg-file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python script file where the objective function resides.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-study-optimize-arg-method">
+<code class="sig-name descname"><span class="pre">method</span></code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-optuna-study-optimize-arg-method" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method name of the objective function.</p>
+</dd></dl>
+
+<p>This command is provided by the optuna plugin.</p>
+</div>
+<div class="section" id="study-set-user-attr">
+<h2>study set-user-attr<a class="headerlink" href="#study-set-user-attr" title="Permalink to this headline">¶</a></h2>
+<p>Set a user attribute to a study.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>optuna study set-user-attr
+    <span class="o">[</span>--study STUDY<span class="o">]</span>
+    <span class="o">[</span>--study-name STUDY_NAME<span class="o">]</span>
+    --key KEY
+    --value VALUE
+</pre></div>
+</div>
+<dl class="std option">
+<dt id="cmdoption-optuna-study-set-user-attr-study">
+<code class="sig-name descname"><span class="pre">--study</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;STUDY&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-study-set-user-attr-study" title="Permalink to this definition">¶</a></dt>
+<dd><p>This argument is deprecated. Use –study-name instead.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-study-set-user-attr-study-name">
+<code class="sig-name descname"><span class="pre">--study-name</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;STUDY_NAME&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-study-set-user-attr-study-name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the study to set the user attribute to.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-study-set-user-attr-key">
+<span id="cmdoption-optuna-study-set-user-attr-k"></span><code class="sig-name descname"><span class="pre">--key</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;KEY&gt;</span></code><code class="sig-prename descclassname"><span class="pre">,</span> </code><code class="sig-name descname"><span class="pre">-k</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;KEY&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-study-set-user-attr-key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key of the user attribute.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-optuna-study-set-user-attr-value">
+<span id="cmdoption-optuna-study-set-user-attr-v"></span><code class="sig-name descname"><span class="pre">--value</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;VALUE&gt;</span></code><code class="sig-prename descclassname"><span class="pre">,</span> </code><code class="sig-name descname"><span class="pre">-v</span></code><code class="sig-prename descclassname"> <span class="pre">&lt;VALUE&gt;</span></code><a class="headerlink" href="#cmdoption-optuna-study-set-user-attr-value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Value to be set.</p>
+</dd></dl>
+
+<p>This command is provided by the optuna plugin.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="distributions.html" class="btn btn-neutral float-right" title="optuna.distributions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="generated/optuna.TrialPruned.html" class="btn btn-neutral float-left" title="optuna.TrialPruned" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018, Optuna Contributors..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <a href="../privacy.html">Privacy Policy</a>.
+     
+
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Lightweight, versatile, and platform agnostic architecture &mdash; Optuna 2.8.0.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pythonic Search Space" href="002_configurations.html" />
+    <link rel="prev" title="Tutorial" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+  
+    <div class="navbar">
+        <div class="navbar ml-auto">
+            <ul class="navbar-nav">
+                <li>
+                    <a href="https://optuna.org/#key_features" class="header_link">Key Features</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#code_examples" class="header_link">Code Examples</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#installation" class="header_link">Installation</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#blog" class="header_link">Blog</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#video" class="header_link">Videos</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#paper" class="header_link">Paper</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#community" class="header_link">Community</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+     
+
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/optuna-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.8.0.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#key-features">Key Features</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Lightweight, versatile, and platform agnostic architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#quadratic-function-example">Quadratic Function Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#study-object">Study Object</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="002_configurations.html">Pythonic Search Space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="003_efficient_optimization_algorithms.html">Efficient Optimization Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="004_distributed.html">Easy Parallelization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="005_visualization.html">Quick Visualization for Hyperparameter Optimization Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#recipes">Recipes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optuna</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Tutorial</a> &raquo;</li>
+        
+      <li>Lightweight, versatile, and platform agnostic architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorial/10_key_features/001_first.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-tutorial-10-key-features-001-first-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="lightweight-versatile-and-platform-agnostic-architecture">
+<span id="first"></span><span id="sphx-glr-tutorial-10-key-features-001-first-py"></span><h1>Lightweight, versatile, and platform agnostic architecture<a class="headerlink" href="#lightweight-versatile-and-platform-agnostic-architecture" title="Permalink to this headline">¶</a></h1>
+<p>Optuna is entirely written in Python and has few dependencies.
+This means that we can quickly move to the real example once you get interested in Optuna.</p>
+<div class="section" id="quadratic-function-example">
+<h2>Quadratic Function Example<a class="headerlink" href="#quadratic-function-example" title="Permalink to this headline">¶</a></h2>
+<p>Usually, Optuna is used to optimize hyperparameters, but as an example,
+let’s optimize a simple quadratic function: <span class="math notranslate nohighlight">\((x - 2)^2\)</span>.</p>
+<p>First of all, import <a class="reference internal" href="../../reference/optuna.html#module-optuna" title="optuna"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optuna</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optuna</span>
+</pre></div>
+</div>
+<p>In optuna, conventionally functions to be optimized are named <cite>objective</cite>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">trial</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>This function returns the value of <span class="math notranslate nohighlight">\((x - 2)^2\)</span>. Our goal is to find the value of <code class="docutils literal notranslate"><span class="pre">x</span></code>
+that minimizes the output of the <code class="docutils literal notranslate"><span class="pre">objective</span></code> function. This is the “optimization.”
+During the optimization, Optuna repeatedly calls and evaluates the objective function with
+different values of <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<p>A <a class="reference internal" href="../../reference/generated/optuna.trial.Trial.html#optuna.trial.Trial" title="optuna.trial.Trial"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trial</span></code></a> object corresponds to a single execution of the objective
+function and is internally instantiated upon each invocation of the function.</p>
+<p>The <cite>suggest</cite> APIs (for example, <a class="reference internal" href="../../reference/generated/optuna.trial.Trial.html#optuna.trial.Trial.suggest_float" title="optuna.trial.Trial.suggest_float"><code class="xref py py-func docutils literal notranslate"><span class="pre">suggest_float()</span></code></a>) are called
+inside the objective function to obtain parameters for a trial.
+<a class="reference internal" href="../../reference/generated/optuna.trial.Trial.html#optuna.trial.Trial.suggest_float" title="optuna.trial.Trial.suggest_float"><code class="xref py py-func docutils literal notranslate"><span class="pre">suggest_float()</span></code></a> selects parameters uniformly within the range
+provided. In our example, from <span class="math notranslate nohighlight">\(-10\)</span> to <span class="math notranslate nohighlight">\(10\)</span>.</p>
+<p>To start the optimization, we create a study object and pass the objective function to method
+<a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study.optimize" title="optuna.study.Study.optimize"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize()</span></code></a> as follows.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">study</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">create_study</span><span class="p">()</span>
+<span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can get the best parameter as follows.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">best_params</span></a> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">best_params</span></a>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">found_x</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">best_params</span></a><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found x: </span><span class="si">{}</span><span class="s2">, (x - 2)^2: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">found_x</span></a><span class="p">,</span> <span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">found_x</span></a> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Found x: 1.9943414484706024, (x - 2)^2: 3.2019205410848466e-05
+</pre></div>
+</div>
+<p>We can see that the <code class="docutils literal notranslate"><span class="pre">x</span></code> value found by Optuna is close to the optimal value of <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When used to search for hyperparameters in machine learning,
+usually the objective function would return the loss or accuracy
+of the model.</p>
+</div>
+</div>
+<div class="section" id="study-object">
+<h2>Study Object<a class="headerlink" href="#study-object" title="Permalink to this headline">¶</a></h2>
+<p>Let us clarify the terminology in Optuna as follows:</p>
+<ul class="simple">
+<li><p><strong>Trial</strong>: A single call of the objective function</p></li>
+<li><p><strong>Study</strong>: An optimization session, which is a set of trials</p></li>
+<li><p><strong>Parameter</strong>: A variable whose value is to be optimized, such as <code class="docutils literal notranslate"><span class="pre">x</span></code> in the above example</p></li>
+</ul>
+<p>In Optuna, we use the study object to manage optimization.
+Method <a class="reference internal" href="../../reference/generated/optuna.study.create_study.html#optuna.study.create_study" title="optuna.study.create_study"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_study()</span></code></a> returns a study object.
+A study object has useful properties for analyzing the optimization outcome.</p>
+<p>To get the dictionary of parameter name and parameter values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">study</span><span class="o">.</span><a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">best_params</span></a>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;x&#39;: 1.9943414484706024}
+</pre></div>
+</div>
+<p>To get the best observed value of the objective function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">study</span><span class="o">.</span><span class="n">best_value</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>3.2019205410848466e-05
+</pre></div>
+</div>
+<p>To get the best trial:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">study</span><span class="o">.</span><span class="n">best_trial</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>FrozenTrial(number=41, values=[3.2019205410848466e-05], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 914850), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 919097), params={&#39;x&#39;: 1.9943414484706024}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=41, state=TrialState.COMPLETE, value=None)
+</pre></div>
+</div>
+<p>To get all trials:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">study</span><span class="o">.</span><span class="n">trials</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[FrozenTrial(number=0, values=[27.29924812652847], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 762052), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 762503), params={&#39;x&#39;: -3.2248682401117517}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=0, state=TrialState.COMPLETE, value=None), FrozenTrial(number=1, values=[50.288864015901545], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 762861), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 763261), params={&#39;x&#39;: 9.09146416587587}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=1, state=TrialState.COMPLETE, value=None), FrozenTrial(number=2, values=[20.225091747930097], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 763658), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 764035), params={&#39;x&#39;: -2.497231564855216}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=2, state=TrialState.COMPLETE, value=None), FrozenTrial(number=3, values=[0.7398806335114773], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 764363), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 764739), params={&#39;x&#39;: 2.860163143543989}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=3, state=TrialState.COMPLETE, value=None), FrozenTrial(number=4, values=[61.71492632553489], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 765067), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 765444), params={&#39;x&#39;: 9.8558848213002}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=4, state=TrialState.COMPLETE, value=None), FrozenTrial(number=5, values=[0.010877052354554429], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 765771), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 766152), params={&#39;x&#39;: 2.1042931078957494}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=5, state=TrialState.COMPLETE, value=None), FrozenTrial(number=6, values=[14.918649018611404], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 766478), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 766754), params={&#39;x&#39;: 5.862466701294835}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=6, state=TrialState.COMPLETE, value=None), FrozenTrial(number=7, values=[138.06262887513205], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 767072), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 767378), params={&#39;x&#39;: -9.750005484046893}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=7, state=TrialState.COMPLETE, value=None), FrozenTrial(number=8, values=[4.562307610199481], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 767700), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 767983), params={&#39;x&#39;: 4.135955900808694}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=8, state=TrialState.COMPLETE, value=None), FrozenTrial(number=9, values=[14.241258669273279], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 768304), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 768589), params={&#39;x&#39;: 5.773759222482706}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=9, state=TrialState.COMPLETE, value=None), FrozenTrial(number=10, values=[98.14803720512607], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 768907), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 773600), params={&#39;x&#39;: -7.9069691230530275}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=10, state=TrialState.COMPLETE, value=None), FrozenTrial(number=11, values=[1.6536994508568665], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 773952), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 778210), params={&#39;x&#39;: 0.7140375390949911}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=11, state=TrialState.COMPLETE, value=None), FrozenTrial(number=12, values=[0.04713202847762153], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 778551), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 782885), params={&#39;x&#39;: 1.7829008786806784}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=12, state=TrialState.COMPLETE, value=None), FrozenTrial(number=13, values=[11.67327144308461], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 783246), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 787563), params={&#39;x&#39;: -1.4166169587890025}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=13, state=TrialState.COMPLETE, value=None), FrozenTrial(number=14, values=[0.46255267294513186], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 787905), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 792168), params={&#39;x&#39;: 1.3198877497463144}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=14, state=TrialState.COMPLETE, value=None), FrozenTrial(number=15, values=[60.9567567489342], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 792508), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 797029), params={&#39;x&#39;: -5.807480819632809}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=15, state=TrialState.COMPLETE, value=None), FrozenTrial(number=16, values=[28.567241471780388], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 797376), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 802058), params={&#39;x&#39;: 7.3448331565896785}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=16, state=TrialState.COMPLETE, value=None), FrozenTrial(number=17, values=[0.6553473977856812], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 802408), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 806791), params={&#39;x&#39;: 2.8095352974303722}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=17, state=TrialState.COMPLETE, value=None), FrozenTrial(number=18, values=[7.4040443700376], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 807137), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 811451), params={&#39;x&#39;: -0.7210373702023278}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=18, state=TrialState.COMPLETE, value=None), FrozenTrial(number=19, values=[46.21512858060674], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 811791), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 816219), params={&#39;x&#39;: -4.798170973181444}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=19, state=TrialState.COMPLETE, value=None), FrozenTrial(number=20, values=[0.3650213512569039], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 816561), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 820832), params={&#39;x&#39;: 1.395830031152736}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=20, state=TrialState.COMPLETE, value=None), FrozenTrial(number=21, values=[0.0463398390004173], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 821172), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 825536), params={&#39;x&#39;: 1.7847330982235836}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=21, state=TrialState.COMPLETE, value=None), FrozenTrial(number=22, values=[1.2401172214733782], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 825877), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 830171), params={&#39;x&#39;: 3.1136055053174703}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=22, state=TrialState.COMPLETE, value=None), FrozenTrial(number=23, values=[7.26791777156929], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 830513), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 834795), params={&#39;x&#39;: 4.695907597001294}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=23, state=TrialState.COMPLETE, value=None), FrozenTrial(number=24, values=[3.9239910371840936], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 835264), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 839554), params={&#39;x&#39;: 0.01909337999387417}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=24, state=TrialState.COMPLETE, value=None), FrozenTrial(number=25, values=[0.00026515189311503395], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 839896), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 844202), params={&#39;x&#39;: 1.983716514712291}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=25, state=TrialState.COMPLETE, value=None), FrozenTrial(number=26, values=[33.56076721057011], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 844544), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 848974), params={&#39;x&#39;: 7.793165560431543}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=26, state=TrialState.COMPLETE, value=None), FrozenTrial(number=27, values=[14.441179496969768], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 849328), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 853690), params={&#39;x&#39;: -1.8001551938006122}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=27, state=TrialState.COMPLETE, value=None), FrozenTrial(number=28, values=[4.443057216476942], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 854035), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 858627), params={&#39;x&#39;: -0.10785607110090445}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=28, state=TrialState.COMPLETE, value=None), FrozenTrial(number=29, values=[27.835256017144626], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 858995), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 863412), params={&#39;x&#39;: -3.2759128136413165}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=29, state=TrialState.COMPLETE, value=None), FrozenTrial(number=30, values=[4.623263823694671], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 863746), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 868280), params={&#39;x&#39;: 4.150177626079918}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=30, state=TrialState.COMPLETE, value=None), FrozenTrial(number=31, values=[0.06308152696148298], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 868615), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 873136), params={&#39;x&#39;: 1.748839638952555}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=31, state=TrialState.COMPLETE, value=None), FrozenTrial(number=32, values=[0.012750850197397577], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 873484), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 878147), params={&#39;x&#39;: 2.1129196625809588}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=32, state=TrialState.COMPLETE, value=None), FrozenTrial(number=33, values=[0.8085196318058722], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 878497), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 882732), params={&#39;x&#39;: 2.899177197111822}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=33, state=TrialState.COMPLETE, value=None), FrozenTrial(number=34, values=[9.618210778409987], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 883115), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 887311), params={&#39;x&#39;: 5.101324036344797}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=34, state=TrialState.COMPLETE, value=None), FrozenTrial(number=35, values=[23.319110170226384], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 887663), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 891746), params={&#39;x&#39;: 6.828986453721566}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=35, state=TrialState.COMPLETE, value=None), FrozenTrial(number=36, values=[2.0010470975003005], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 892098), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 896341), params={&#39;x&#39;: 3.4145837188022137}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=36, state=TrialState.COMPLETE, value=None), FrozenTrial(number=37, values=[30.96216820353742], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 896724), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 900867), params={&#39;x&#39;: -3.5643659300532544}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=37, state=TrialState.COMPLETE, value=None), FrozenTrial(number=38, values=[0.021620095033429848], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 901246), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 905421), params={&#39;x&#39;: 2.1470377333660644}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=38, state=TrialState.COMPLETE, value=None), FrozenTrial(number=39, values=[2.6393526289885307], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 905876), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 910031), params={&#39;x&#39;: 0.37539154594452184}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=39, state=TrialState.COMPLETE, value=None), FrozenTrial(number=40, values=[9.41165849900002], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 910390), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 914504), params={&#39;x&#39;: -1.06784264573658}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=40, state=TrialState.COMPLETE, value=None), FrozenTrial(number=41, values=[3.2019205410848466e-05], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 914850), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 919097), params={&#39;x&#39;: 1.9943414484706024}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=41, state=TrialState.COMPLETE, value=None), FrozenTrial(number=42, values=[0.3063494131949954], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 919485), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 923676), params={&#39;x&#39;: 2.5534884038487125}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=42, state=TrialState.COMPLETE, value=None), FrozenTrial(number=43, values=[4.879725936791957], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 924054), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 928360), params={&#39;x&#39;: 4.209010171273993}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=43, state=TrialState.COMPLETE, value=None), FrozenTrial(number=44, values=[14.043086816055968], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 928713), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 933049), params={&#39;x&#39;: 5.747410681531445}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=44, state=TrialState.COMPLETE, value=None), FrozenTrial(number=45, values=[1.8642278373242938], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 933423), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 937967), params={&#39;x&#39;: 0.6346327097354743}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=45, state=TrialState.COMPLETE, value=None), FrozenTrial(number=46, values=[2.146632600804104], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 938351), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 942554), params={&#39;x&#39;: 3.465139106298137}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=46, state=TrialState.COMPLETE, value=None), FrozenTrial(number=47, values=[0.08879001901735176], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 942924), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 947302), params={&#39;x&#39;: 2.297976541052063}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=47, state=TrialState.COMPLETE, value=None), FrozenTrial(number=48, values=[6.227748348551662], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 947698), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 951812), params={&#39;x&#39;: -0.49554570155540567}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=48, state=TrialState.COMPLETE, value=None), FrozenTrial(number=49, values=[0.6126878675337102], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 952165), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 956586), params={&#39;x&#39;: 1.2172561929125787}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=49, state=TrialState.COMPLETE, value=None), FrozenTrial(number=50, values=[17.41841310691796], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 956944), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 961459), params={&#39;x&#39;: -2.1735372415875194}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=50, state=TrialState.COMPLETE, value=None), FrozenTrial(number=51, values=[0.03156361987424872], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 961839), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 966328), params={&#39;x&#39;: 2.1776615317795294}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=51, state=TrialState.COMPLETE, value=None), FrozenTrial(number=52, values=[0.040603444501924046], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 966720), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 971007), params={&#39;x&#39;: 2.2015029640028256}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=52, state=TrialState.COMPLETE, value=None), FrozenTrial(number=53, values=[9.46307964864009], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 971406), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 976451), params={&#39;x&#39;: 5.076211899177313}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=53, state=TrialState.COMPLETE, value=None), FrozenTrial(number=54, values=[1.043414926591219], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 976855), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 981294), params={&#39;x&#39;: 0.9785231639477971}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=54, state=TrialState.COMPLETE, value=None), FrozenTrial(number=55, values=[2.788909555249992], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 981660), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 985997), params={&#39;x&#39;: 3.6700028608508406}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=55, state=TrialState.COMPLETE, value=None), FrozenTrial(number=56, values=[0.15072196211880912], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 986419), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 990707), params={&#39;x&#39;: 2.3882292648922916}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=56, state=TrialState.COMPLETE, value=None), FrozenTrial(number=57, values=[2.678426010068969], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 991077), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 46, 995346), params={&#39;x&#39;: 0.363410249919373}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=57, state=TrialState.COMPLETE, value=None), FrozenTrial(number=58, values=[0.35591508478177625], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 46, 995706), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 160), params={&#39;x&#39;: 1.4034138077513223}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=58, state=TrialState.COMPLETE, value=None), FrozenTrial(number=59, values=[3.5674698760007355], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 523), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 4795), params={&#39;x&#39;: 3.888774702287368}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=59, state=TrialState.COMPLETE, value=None), FrozenTrial(number=60, values=[18.713132994339208], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 5156), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 9503), params={&#39;x&#39;: 6.325867889145392}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=60, state=TrialState.COMPLETE, value=None), FrozenTrial(number=61, values=[0.00978526639996658], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 9872), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 14189), params={&#39;x&#39;: 2.0989205054574964}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=61, state=TrialState.COMPLETE, value=None), FrozenTrial(number=62, values=[0.013110650581596259], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 14546), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 18900), params={&#39;x&#39;: 2.1145017492512506}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=62, state=TrialState.COMPLETE, value=None), FrozenTrial(number=63, values=[1.0064256443220212], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 19279), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 23486), params={&#39;x&#39;: 3.0032076775633354}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=63, state=TrialState.COMPLETE, value=None), FrozenTrial(number=64, values=[6.444415105312708], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 23848), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 28132), params={&#39;x&#39;: -0.5385852566562952}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=64, state=TrialState.COMPLETE, value=None), FrozenTrial(number=65, values=[0.20746884018723855], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 28495), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 32711), params={&#39;x&#39;: 1.5445125246647955}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=65, state=TrialState.COMPLETE, value=None), FrozenTrial(number=66, values=[8.96276577969006], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 33073), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 37408), params={&#39;x&#39;: 4.993787864844478}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=66, state=TrialState.COMPLETE, value=None), FrozenTrial(number=67, values=[2.0279808303312628], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 37772), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 41991), params={&#39;x&#39;: 0.5759280810537473}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=67, state=TrialState.COMPLETE, value=None), FrozenTrial(number=68, values=[5.394609261399012], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 42353), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 46564), params={&#39;x&#39;: 4.3226298158335545}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=68, state=TrialState.COMPLETE, value=None), FrozenTrial(number=69, values=[1.051658334278494], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 46927), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 51208), params={&#39;x&#39;: 3.0255039416201646}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=69, state=TrialState.COMPLETE, value=None), FrozenTrial(number=70, values=[0.06093141686186835], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 51613), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 55829), params={&#39;x&#39;: 1.7531571008477895}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=70, state=TrialState.COMPLETE, value=None), FrozenTrial(number=71, values=[0.014544843949269312], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 56191), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 60772), params={&#39;x&#39;: 2.1206020064064828}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=71, state=TrialState.COMPLETE, value=None), FrozenTrial(number=72, values=[3.8523621473913714], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 61139), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 65412), params={&#39;x&#39;: 0.03725647437283053}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=72, state=TrialState.COMPLETE, value=None), FrozenTrial(number=73, values=[0.8063566566656836], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 65777), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 70275), params={&#39;x&#39;: 1.1020263608180452}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=73, state=TrialState.COMPLETE, value=None), FrozenTrial(number=74, values=[0.07385219467069372], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 70639), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 74969), params={&#39;x&#39;: 2.271757602783609}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=74, state=TrialState.COMPLETE, value=None), FrozenTrial(number=75, values=[0.5522690491533543], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 75418), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 80139), params={&#39;x&#39;: 2.7431480667763015}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=75, state=TrialState.COMPLETE, value=None), FrozenTrial(number=76, values=[2.2863489348205346], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 80512), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 84943), params={&#39;x&#39;: 3.5120677679325536}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=76, state=TrialState.COMPLETE, value=None), FrozenTrial(number=77, values=[0.003019679002029841], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 85356), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 90021), params={&#39;x&#39;: 1.9450483939995395}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=77, state=TrialState.COMPLETE, value=None), FrozenTrial(number=78, values=[1.0827337904134555], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 90387), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 94832), params={&#39;x&#39;: 0.9594550512287057}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=78, state=TrialState.COMPLETE, value=None), FrozenTrial(number=79, values=[11.18418368931239], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 95241), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 99838), params={&#39;x&#39;: -1.3442762579237366}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=79, state=TrialState.COMPLETE, value=None), FrozenTrial(number=80, values=[6.472194308604193], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 100240), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 104550), params={&#39;x&#39;: 4.544050767693953}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=80, state=TrialState.COMPLETE, value=None), FrozenTrial(number=81, values=[0.009101159346873234], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 104935), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 109774), params={&#39;x&#39;: 1.9046000034230963}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=81, state=TrialState.COMPLETE, value=None), FrozenTrial(number=82, values=[0.030054961081621354], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 110165), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 114670), params={&#39;x&#39;: 1.82663633286752}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=82, state=TrialState.COMPLETE, value=None), FrozenTrial(number=83, values=[1.3302905867508918], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 115052), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 119846), params={&#39;x&#39;: 3.1533822379206695}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=83, state=TrialState.COMPLETE, value=None), FrozenTrial(number=84, values=[0.03055788204745166], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 120216), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 125493), params={&#39;x&#39;: 1.8251918707626797}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=84, state=TrialState.COMPLETE, value=None), FrozenTrial(number=85, values=[0.3937621838048697], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 125881), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 132785), params={&#39;x&#39;: 2.6275047281135575}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=85, state=TrialState.COMPLETE, value=None), FrozenTrial(number=86, values=[4.341280503067802], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 133200), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 138490), params={&#39;x&#39;: -0.08357397350509266}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=86, state=TrialState.COMPLETE, value=None), FrozenTrial(number=87, values=[1.6072279377698773], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 138914), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 143265), params={&#39;x&#39;: 0.7322350620994926}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=87, state=TrialState.COMPLETE, value=None), FrozenTrial(number=88, values=[3.6351670837634185], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 143702), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 148323), params={&#39;x&#39;: 3.906611413939248}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=88, state=TrialState.COMPLETE, value=None), FrozenTrial(number=89, values=[1.677443339724035], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 148693), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 153069), params={&#39;x&#39;: 3.295161511057225}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=89, state=TrialState.COMPLETE, value=None), FrozenTrial(number=90, values=[0.4054381933523217], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 153440), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 157781), params={&#39;x&#39;: 1.363259712793103}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=90, state=TrialState.COMPLETE, value=None), FrozenTrial(number=91, values=[0.14851723554661406], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 158150), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 162669), params={&#39;x&#39;: 2.3853793398025043}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=91, state=TrialState.COMPLETE, value=None), FrozenTrial(number=92, values=[0.005496130729827911], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 163078), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 167475), params={&#39;x&#39;: 2.0741358936671563}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=92, state=TrialState.COMPLETE, value=None), FrozenTrial(number=93, values=[0.03429947115803809], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 167863), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 172372), params={&#39;x&#39;: 1.814798835970078}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=93, state=TrialState.COMPLETE, value=None), FrozenTrial(number=94, values=[3.0074297358093953], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 172744), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 177234), params={&#39;x&#39;: 0.2658057387335768}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=94, state=TrialState.COMPLETE, value=None), FrozenTrial(number=95, values=[0.6481936714554615], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 177605), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 182354), params={&#39;x&#39;: 2.805104758062863}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=95, state=TrialState.COMPLETE, value=None), FrozenTrial(number=96, values=[1.0016049190034035], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 182749), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 187456), params={&#39;x&#39;: 0.9991978622108146}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=96, state=TrialState.COMPLETE, value=None), FrozenTrial(number=97, values=[3.694570763955115e-05], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 187845), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 192475), params={&#39;x&#39;: 2.0060782980874214}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=97, state=TrialState.COMPLETE, value=None), FrozenTrial(number=98, values=[2.7218001330132515], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 192849), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 197538), params={&#39;x&#39;: 3.6497879054633815}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=98, state=TrialState.COMPLETE, value=None), FrozenTrial(number=99, values=[0.746441856460452], datetime_start=datetime.datetime(2021, 5, 23, 12, 15, 47, 197925), datetime_complete=datetime.datetime(2021, 5, 23, 12, 15, 47, 202929), params={&#39;x&#39;: 1.1360313336350374}, distributions={&#39;x&#39;: UniformDistribution(high=10.0, low=-10.0)}, user_attrs={}, system_attrs={}, intermediate_values={}, trial_id=99, state=TrialState.COMPLETE, value=None)]
+</pre></div>
+</div>
+<p>To get the number of trials:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">study</span><span class="o">.</span><span class="n">trials</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>100
+</pre></div>
+</div>
+<p>By executing <a class="reference internal" href="../../reference/generated/optuna.study.Study.html#optuna.study.Study.optimize" title="optuna.study.Study.optimize"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize()</span></code></a> again, we can continue the optimization.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">study</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To get the updated number of trials:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">study</span><span class="o">.</span><span class="n">trials</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>200
+</pre></div>
+</div>
+<p>As the objective function is so easy that the last 100 trials don’t improve the result.
+However, we can check the result again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">best_params</span></a> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">best_params</span></a>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">found_x</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">best_params</span></a><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found x: </span><span class="si">{}</span><span class="s2">, (x - 2)^2: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">found_x</span></a><span class="p">,</span> <span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">found_x</span></a> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Found x: 2.0007117279050832, (x - 2)^2: 5.065566108741575e-07
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.002 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-10-key-features-001-first-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/c92b98cc9064d8f189c8c89e61fe9c5a/001_first.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">001_first.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/09a922232ee2c9bb3c93aeda0df00ee5/001_first.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">001_first.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="002_configurations.html" class="btn btn-neutral float-right" title="Pythonic Search Space" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018, Optuna Contributors..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <a href="../../privacy.html">Privacy Policy</a>.
+     
+
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

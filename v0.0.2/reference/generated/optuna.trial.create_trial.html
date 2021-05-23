@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>optuna.trial.create_trial &mdash; Optuna 2.8.0.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="optuna.visualization" href="../visualization/index.html" />
+    <link rel="prev" title="optuna.trial.TrialState" href="optuna.trial.TrialState.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+  
+    <div class="navbar">
+        <div class="navbar ml-auto">
+            <ul class="navbar-nav">
+                <li>
+                    <a href="https://optuna.org/#key_features" class="header_link">Key Features</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#code_examples" class="header_link">Code Examples</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#installation" class="header_link">Installation</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#blog" class="header_link">Blog</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#video" class="header_link">Videos</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#paper" class="header_link">Paper</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#community" class="header_link">Community</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+     
+
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/optuna-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.8.0.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../optuna.html">optuna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli.html">optuna.cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributions.html">optuna.distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exceptions.html">optuna.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../importance.html">optuna.importance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integration.html">optuna.integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html">optuna.logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_objective/index.html">optuna.multi_objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pruners.html">optuna.pruners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../samplers.html">optuna.samplers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storages.html">optuna.storages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structs.html">optuna.structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../study.html">optuna.study</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../trial.html">optuna.trial</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="optuna.trial.Trial.html">optuna.trial.Trial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optuna.trial.FixedTrial.html">optuna.trial.FixedTrial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optuna.trial.FrozenTrial.html">optuna.trial.FrozenTrial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optuna.trial.TrialState.html">optuna.trial.TrialState</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">optuna.trial.create_trial</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../visualization/index.html">optuna.visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optuna</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="../trial.html">optuna.trial</a> &raquo;</li>
+        
+      <li>optuna.trial.create_trial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/reference/generated/optuna.trial.create_trial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="optuna-trial-create-trial">
+<h1>optuna.trial.create_trial<a class="headerlink" href="#optuna-trial-create-trial" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="optuna.trial.create_trial">
+<code class="sig-prename descclassname"><span class="pre">optuna.trial.</span></code><code class="sig-name descname"><span class="pre">create_trial</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">TrialState.COMPLETE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distributions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intermediate_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optuna/trial/_frozen.html#create_trial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optuna.trial.create_trial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new <a class="reference internal" href="optuna.trial.FrozenTrial.html#optuna.trial.FrozenTrial" title="optuna.trial.FrozenTrial"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrozenTrial</span></code></a>.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optuna</span>
+<span class="kn">from</span> <span class="nn">optuna.distributions</span> <span class="kn">import</span> <span class="n">CategoricalDistribution</span>
+<span class="kn">from</span> <span class="nn">optuna.distributions</span> <span class="kn">import</span> <span class="n">UniformDistribution</span>
+
+<span class="n">trial</span> <span class="o">=</span> <span class="n">optuna</span><span class="o">.</span><span class="n">trial</span><span class="o">.</span><span class="n">create_trial</span><span class="p">(</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="n">distributions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">UniformDistribution</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">CategoricalDistribution</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+    <span class="p">},</span>
+    <span class="n">value</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trial</span><span class="p">,</span> <span class="n">optuna</span><span class="o">.</span><span class="n">trial</span><span class="o">.</span><span class="n">FrozenTrial</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">trial</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mf">5.0</span>
+<span class="k">assert</span> <span class="n">trial</span><span class="o">.</span><span class="n">params</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="optuna.study.Study.html#optuna.study.Study.add_trial" title="optuna.study.Study.add_trial"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_trial()</span></code></a> for how this function can be used to create a
+study from existing trials.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that this is a low-level API. In general, trials that are passed to objective
+functions are created inside <a class="reference internal" href="optuna.study.Study.html#optuna.study.Study.optimize" title="optuna.study.Study.optimize"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize()</span></code></a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">state</span></code> is <code class="docutils literal notranslate"><span class="pre">TrialState.COMPLETE</span></code>, the following parameters are
+required:
+* <code class="docutils literal notranslate"><span class="pre">params</span></code>
+* <code class="docutils literal notranslate"><span class="pre">distributions</span></code>
+* <code class="docutils literal notranslate"><span class="pre">value</span></code> or <code class="docutils literal notranslate"><span class="pre">values</span></code></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>optuna.trial._state.TrialState</em>) – Trial state.</p></li>
+<li><p><strong>value</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>]</em>) – Trial objective value. Must be specified if <code class="docutils literal notranslate"><span class="pre">state</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>
+or <a class="reference internal" href="optuna.trial.TrialState.html#optuna.trial.TrialState.COMPLETE" title="optuna.trial.TrialState.COMPLETE"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrialState.COMPLETE</span></code></a>.</p></li>
+<li><p><strong>values</strong> (<em>Optional</em><em>[</em><em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>]</em><em>]</em>) – Sequence of the trial objective values. The length is greater than 1 if the problem is
+multi-objective optimization.
+Must be specified if <code class="docutils literal notranslate"><span class="pre">state</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code> or <a class="reference internal" href="optuna.trial.TrialState.html#optuna.trial.TrialState.COMPLETE" title="optuna.trial.TrialState.COMPLETE"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrialState.COMPLETE</span></code></a>.</p></li>
+<li><p><strong>params</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Dictionary with suggested parameters of the trial.</p></li>
+<li><p><strong>distributions</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optuna.distributions.BaseDistribution</em><em>]</em><em>]</em>) – Dictionary with parameter distributions of the trial.</p></li>
+<li><p><strong>user_attrs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Dictionary with user attributes.</p></li>
+<li><p><strong>system_attrs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Dictionary with system attributes. Should not have to be used for most users.</p></li>
+<li><p><strong>intermediate_values</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>]</em><em>]</em>) – Dictionary with intermediate objective values of the trial.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Created trial.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If both <code class="docutils literal notranslate"><span class="pre">value</span></code> and <code class="docutils literal notranslate"><span class="pre">values</span></code> are specified.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>optuna.trial._frozen.FrozenTrial</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Added in v2.0.0 as an experimental feature. The interface may change in newer versions
+without prior notice. See <a class="reference external" href="https://github.com/optuna/optuna/releases/tag/v2.0.0">https://github.com/optuna/optuna/releases/tag/v2.0.0</a>.</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../visualization/index.html" class="btn btn-neutral float-right" title="optuna.visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="optuna.trial.TrialState.html" class="btn btn-neutral float-left" title="optuna.trial.TrialState" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018, Optuna Contributors..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <a href="../../privacy.html">Privacy Policy</a>.
+     
+
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

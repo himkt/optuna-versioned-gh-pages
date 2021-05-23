@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>optuna.pruners &mdash; Optuna 2.8.0.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="optuna.pruners.BasePruner" href="generated/optuna.pruners.BasePruner.html" />
+    <link rel="prev" title="optuna.multi_objective.visualization.plot_pareto_front" href="multi_objective/generated/optuna.multi_objective.visualization.plot_pareto_front.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+  
+    <div class="navbar">
+        <div class="navbar ml-auto">
+            <ul class="navbar-nav">
+                <li>
+                    <a href="https://optuna.org/#key_features" class="header_link">Key Features</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#code_examples" class="header_link">Code Examples</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#installation" class="header_link">Installation</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#blog" class="header_link">Blog</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#video" class="header_link">Videos</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#paper" class="header_link">Paper</a>
+                </li>
+                <li>
+                    <a href="https://optuna.org/#community" class="header_link">Community</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+     
+
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/optuna-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.8.0.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optuna.html">optuna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html">optuna.cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributions.html">optuna.distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">optuna.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="importance.html">optuna.importance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration.html">optuna.integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">optuna.logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_objective/index.html">optuna.multi_objective</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">optuna.pruners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/optuna.pruners.BasePruner.html">optuna.pruners.BasePruner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/optuna.pruners.MedianPruner.html">optuna.pruners.MedianPruner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/optuna.pruners.NopPruner.html">optuna.pruners.NopPruner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/optuna.pruners.PercentilePruner.html">optuna.pruners.PercentilePruner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/optuna.pruners.SuccessiveHalvingPruner.html">optuna.pruners.SuccessiveHalvingPruner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/optuna.pruners.HyperbandPruner.html">optuna.pruners.HyperbandPruner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/optuna.pruners.ThresholdPruner.html">optuna.pruners.ThresholdPruner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="samplers.html">optuna.samplers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storages.html">optuna.storages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structs.html">optuna.structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="study.html">optuna.study</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trial.html">optuna.trial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization/index.html">optuna.visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optuna</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">API Reference</a> &raquo;</li>
+        
+      <li>optuna.pruners</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/reference/pruners.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-optuna.pruners"></span><div class="section" id="optuna-pruners">
+<h1>optuna.pruners<a class="headerlink" href="#optuna-pruners" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-optuna.pruners" title="optuna.pruners"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pruners</span></code></a> module defines a <a class="reference internal" href="generated/optuna.pruners.BasePruner.html#optuna.pruners.BasePruner" title="optuna.pruners.BasePruner"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasePruner</span></code></a> class characterized by an abstract <a class="reference internal" href="generated/optuna.pruners.BasePruner.html#optuna.pruners.BasePruner.prune" title="optuna.pruners.BasePruner.prune"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prune()</span></code></a> method, which, for a given trial and its associated study, returns a boolean value representing whether the trial should be pruned. This determination is made based on stored intermediate values of the objective function, as previously reported for the trial using <a class="reference internal" href="generated/optuna.trial.Trial.html#optuna.trial.Trial.report" title="optuna.trial.Trial.report"><code class="xref py py-meth docutils literal notranslate"><span class="pre">optuna.trial.Trial.report()</span></code></a>. The remaining classes in this module represent child classes, inheriting from <a class="reference internal" href="generated/optuna.pruners.BasePruner.html#optuna.pruners.BasePruner" title="optuna.pruners.BasePruner"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasePruner</span></code></a>, which implement different pruning strategies.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/optuna.pruners.BasePruner.html#optuna.pruners.BasePruner" title="optuna.pruners.BasePruner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optuna.pruners.BasePruner</span></code></a></p></td>
+<td><p>Base class for pruners.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/optuna.pruners.MedianPruner.html#optuna.pruners.MedianPruner" title="optuna.pruners.MedianPruner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optuna.pruners.MedianPruner</span></code></a></p></td>
+<td><p>Pruner using the median stopping rule.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/optuna.pruners.NopPruner.html#optuna.pruners.NopPruner" title="optuna.pruners.NopPruner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optuna.pruners.NopPruner</span></code></a></p></td>
+<td><p>Pruner which never prunes trials.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/optuna.pruners.PercentilePruner.html#optuna.pruners.PercentilePruner" title="optuna.pruners.PercentilePruner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optuna.pruners.PercentilePruner</span></code></a></p></td>
+<td><p>Pruner to keep the specified percentile of the trials.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/optuna.pruners.SuccessiveHalvingPruner.html#optuna.pruners.SuccessiveHalvingPruner" title="optuna.pruners.SuccessiveHalvingPruner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optuna.pruners.SuccessiveHalvingPruner</span></code></a></p></td>
+<td><p>Pruner using Asynchronous Successive Halving Algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/optuna.pruners.HyperbandPruner.html#optuna.pruners.HyperbandPruner" title="optuna.pruners.HyperbandPruner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optuna.pruners.HyperbandPruner</span></code></a></p></td>
+<td><p>Pruner using Hyperband.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/optuna.pruners.ThresholdPruner.html#optuna.pruners.ThresholdPruner" title="optuna.pruners.ThresholdPruner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optuna.pruners.ThresholdPruner</span></code></a></p></td>
+<td><p>Pruner to detect outlying metrics of the trials.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="generated/optuna.pruners.BasePruner.html" class="btn btn-neutral float-right" title="optuna.pruners.BasePruner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="multi_objective/generated/optuna.multi_objective.visualization.plot_pareto_front.html" class="btn btn-neutral float-left" title="optuna.multi_objective.visualization.plot_pareto_front" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018, Optuna Contributors..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <a href="../privacy.html">Privacy Policy</a>.
+     
+
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
